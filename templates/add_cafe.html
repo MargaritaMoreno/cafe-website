@@ -1,0 +1,132 @@
+{% include "header.html" %}
+
+<div class="container py-5">
+    <div class="row">
+    <div class="col-12">
+    <form class="form-horizontal" action="/add_cafe">
+        <fieldset>
+        
+        <!-- Form Name -->
+        <h3 class="col-12 group card-title inner list-group-item-heading mb-5 text-center">Add Coffee Bar</h3>
+        
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="name">Name</label>  
+        <div class="col-md-4">
+        <input id="name" name="name" type="text" placeholder="Coffee Bar" class="form-control input-md">
+            
+        </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="map_url">Map URL</label>  
+        <div class="col-md-4">
+        <input id="map_url" name="map_url" type="text" placeholder="Google Maps URL" class="form-control input-md">
+            
+        </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="image_url">Image URL</label>  
+        <div class="col-md-4">
+        <input id="image_url" name="image_url" type="text" placeholder="Image URL" class="form-control input-md">
+            
+        </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="location">Location</label>  
+        <div class="col-md-4">
+        <input id="location" name="location" type="text" placeholder="Location of Coffee Bar" class="form-control input-md">
+            
+        </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="seats">Seats</label>  
+        <div class="col-md-4">
+        <input id="seats" name="seats" type="number" placeholder="20" class="form-control input-md">
+            
+        </div>
+        </div>
+        
+        <!-- Checkbox Group -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="amenities">Amenities</label>
+            <div class="col-md-4">
+                <div class="checkbox">
+                    <label for="amenities-0">
+                        <input type="checkbox" name="has_toilet" id="amenities-0" value="1">
+                        Has Toilet
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label for="amenities-1">
+                        <input type="checkbox" name="has_wifi" id="amenities-1" value="1">
+                        Has WiFi
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label for="amenities-2">
+                        <input type="checkbox" name="has_sockets" id="amenities-2" value="1">
+                        Has Sockets
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label for="amenities-3">
+                        <input type="checkbox" name="can_take_calls" id="amenities-3" value="1">
+                        Can Take Calls
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Textarea -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="coffee_price">Coffee Price</label>
+        <div class="col-md-4">                     
+            <input id="coffee_price" name="coffee_price" type="text" placeholder="$4.00" class="form-control input-md">
+        </div>
+        </div>
+        
+        
+        </fieldset>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for=""></label>
+            <div class="col-md-4 text-center">
+                <button type="submit" class="btn btn-info">Add Coffee Bar</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+	$('#list').click(function(event){
+        event.preventDefault();
+        $('#products .item').addClass('list-group-item');
+        $('#grid').removeClass('btn-info');
+        $('#grid').addClass('btn-light');
+        $('#list').removeClass('btn-light');
+        $('#list').addClass('btn-info');
+    });
+	$('#grid').click(function(event){
+        event.preventDefault();
+        $('#products .item').removeClass('list-group-item');
+        $('#products .item').addClass('grid-group-item');
+        $('#list').removeClass('btn-info');
+        $('#list').addClass('btn-light');
+        $('#grid').removeClass('btn-light');
+        $('#grid').addClass('btn-info');
+    });
+});
+</script>

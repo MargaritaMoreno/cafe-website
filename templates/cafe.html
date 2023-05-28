@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Cafes</title>
+
+	<link href="../static/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/b4f9c1069d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/styles.css"> 
+	<link rel="stylesheet" href="../static/css/headers.css"> 
+</head>
+<body>
+    
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
+      <div class="col-6 align-baseline">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+            <i class="fa-solid fa-mug-hot fa-2xl" style="color: #644816;"></i>
+        </a>
+      </div>
+      {% if not current_user.is_authenticated: %}
+      <div class="col-6 text-right align-baseline">
+        <a type="button" class="btn btn-outline-primary" href="{{url_for('login')}}">Login</a>
+      </div>
+      {% else: %}
+      <a type="button" class="btn btn-outline-primary" href="{{url_for('logout')}}">Logout</a>
+      {% endif %}
+    </header>
+  </div>
+
+<!-- Contenedor de Cards para Cafes -->
+<div class="container my-5">
+    <div id="products" class="row view-group">
+            <div class="item col-xs-4 col-lg-4 list-group-item">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <img class="group list-group-image img-fluid" src="{{cafe.img_url}}" alt="" />
+                    </div>
+                    <div class="caption card-body">
+                        <div class="row">
+                            <h4 class="col-12 group card-title inner list-group-item-heading">
+                                {{cafe.name}}</h4>
+                            <h6 class="col-12 group card-title inner list-group-item-heading">
+                                {{cafe.location}}</h6>
+                            <p class="col-12 group inner list-group-item-text">
+                                Seats: {{cafe.seats}}</p>
+                            <p class="col-12 group inner list-group-item-text">
+                                Commodities: {%if cafe.has_toilet:%}{{"🚽 "}}{%endif%} {%if cafe.has_wifi:%}{{"📶 "}}{%endif%} {%if cafe.has_sockets:%}{{"🔌 "}}{%endif%}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    Coffee Price: {{cafe.coffee_price}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="{{cafe.map_url}}">Map Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+        <!--- Post Form Begins -->
+    <section class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Make
+                        a Post</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                    <form action="/create_post" method="POST">
+                    <input type="hidden" name="cafe_id" value="{{cafe.id}}">
+                    <input type="hidden" name="user_id" value="{{current_user.id}}">
+                    <div class="form-group">
+                        <label class="sr-only" for="content">Post</label>
+                        <textarea class="form-control" name="content" id="content" rows="3" placeholder="Say something about this Coffee Bar..."></textarea>
+                    </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-info">Share</button>
+                    </div>
+                </form>
+        </div>
+    </section>
+    <!--- Post Form Ends -->
+
+    <!-- Post Begins -->
+    {% for post in all_posts:%}
+    <section class="card mt-4">
+        <div class="border p-2">
+            <!-- post header -->
+            <div class="row m-0">
+            </div>
+            <!-- post body -->
+            <div class="">
+                <p class="my-2">
+                    {{post.user_post}}
+                </p>
+            </div>
+            <hr class="my-1">
+        </div>
+    </section>
+    <!-- Post Ends -->
+    {% endfor %}
+    
+</div>
+
+</body>
+</html>
+
+<script src="..static\css\vendor\bootstrap\js\bootstrap.bundle.js"></script>
+<script>
+$(document).ready(function() {
+		$('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
+		$('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
+	});
+</script>
